@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Postulaciones</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0b0b0f;--panel:#17171c;--line:#2c2c35;--ink:#fff;--muted:#a9a9b4;--acc:#5865F2;--ok:#23A55A;--err:#F23F43;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Outfit,system-ui,sans-serif;min-height:100vh}
+header{text-align:center;padding:48px 20px 10px}
+header h1{margin:0;font:700 36px/1.1 Outfit}
+header p{color:var(--muted);margin:10px 0 0}
+.tabs{display:flex;justify-content:center;gap:10px;margin:28px 0 0;flex-wrap:wrap;padding:0 16px}
+.tab{padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 15px inherit;cursor:pointer}
+.tab.active{background:var(--acc);border-color:var(--acc)}
+main{max-width:560px;margin:0 auto;padding:28px 20px 90px}
+.form{display:none}
+.form.active{display:block}
+label{display:block;margin:16px 0 6px;font-size:14px;color:var(--muted)}
+input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit}
+textarea{min-height:90px;resize:vertical}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}
+.req:after{content:" *";color:var(--err)}
+button.send{margin-top:24px;width:100%;padding:13px;border:0;border-radius:10px;background:#fff;color:#000;font:700 16px inherit;cursor:pointer}
+button.send:disabled{opacity:.6;cursor:default}
+.msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14px;display:none}
+.msg.ok{display:block;background:rgba(35,165,90,.15);color:var(--ok);border:1px solid var(--ok)}
+.msg.err{display:block;background:rgba(242,63,67,.15);color:var(--err);border:1px solid var(--err)}
+#gear{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:#fff;font-size:20px}
+#panel{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;place-items:center;z-index:30;padding:16px}
+#panel.open{display:grid}
+.box{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.box h2{margin:0 0 4px;font-size:20px}
+.row{display:flex;gap:8px;margin-top:18px}
+.btn2{flex:1;padding:9px;border-radius:8px;border:1px solid var(--line);background:#23232b;color:#fff;cursor:pointer}
+:focus-visible{outline:3px solid #8ab4ff;outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Únete al equipo</h1>
+  <p>Elige a qué quieres postularte</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" data-tab="staff">Postulación de Staff</button>
+  <button class="tab" data-tab="streamer">Postulación de Streamer</button>
+</div>
+
+<main>
+  <!-- STAFF -->
+  <form class="form active" id="form-staff">
+    <label class="req" for="s-user">Usuario de Discord</label>
+    <input id="s-user" required placeholder="usuario#0000 o @usuario">
+
+    <label for="s-name">Nombre o apodo</label>
+    <input id="s-name">
+
+    <label class="req" for="s-age">Edad</label>
+    <input id="s-age" type="number" min="10" max="99" required>
+
+    <label for="s-country">País de residencia</label>
+    <input id="s-country">
+
+    <label for="s-tz">Zona horaria</label>
+    <input id="s-tz" placeholder="Ej: GMT-6 (Guatemala)">
+
+    <label class="req" for="s-time">¿Cuántas horas por semana puedes dedicar?</label>
+    <input id="s-time" required placeholder="Ej: 10-15 horas">
+
+    <label for="s-role">¿Qué rol te interesa más?</label>
+    <select id="s-role"><option>Moderador</option><option>Soporte / Ayudante</option><option>Organizador de eventos</option><option>Encargado de redes</option><option>Otro</option></select>
+
+    <label for="s-exp">¿Tienes experiencia como staff o moderador?</label>
+    <textarea id="s-exp" placeholder="Cuéntanos en qué servidores y qué hacías"></textarea>
+
+    <label for="s-sanction">¿Has sido sancionado en algún servidor? Explica</label>
+    <textarea id="s-sanction"></textarea>
+
+    <label class="req" for="s-why">¿Por qué quieres ser parte del staff?</label>
+    <textarea id="s-why" required></textarea>
+
+    <label for="s-scenario">¿Qué harías si dos miembros empiezan a pelear en un canal?</label>
+    <textarea id="s-scenario"></textarea>
+
+    <label for="s-spam">¿Qué harías con un usuario que hace spam o publicidad?</label>
+    <textarea id="s-spam"></textarea>
+
+    <label for="s-bots">¿Conoces bots de moderación? ¿Cuáles has usado?</label>
+    <input id="s-bots">
+
+    <label for="s-contact">Otra red social o contacto</label>
+    <input id="s-contact">
+
+    <label for="s-extra">¿Algo más que quieras compartir?</label>
+    <textarea id="s-extra"></textarea>
+
+    <button class="send" type="submit">Enviar postulación de Staff</button>
+    <div class="msg" id="msg-staff"></div>
+  </form>
+
+  <!-- STREAMER -->
+  <form class="form" id="form-streamer">
+    <label class="req" for="r-user">Usuario de Discord</label>
+    <input id="r-user" required placeholder="usuario#0000 o @usuario">
+
+    <label for="r-name">Nombre o apodo</label>
+    <input id="r-name">
+
+    <label for="r-age">Edad</label>
+    <input id="r-age" type="number" min="10" max="99">
+
+    <label for="r-country">País de residencia</label>
+    <input id="r-country">
+
+    <label class="req" for="r-platform">Plataforma principal</label>
+    <select id="r-platform">
+      <option>Twitch</option><option>YouTube</option><option>Kick</option><option>TikTok</option><option>Otra</option>
+    </select>
+
+    <label class="req" for="r-link">Enlace a tu canal</label>
+    <input id="r-link" type="url" required placeholder="https://twitch.tv/tu-canal">
+
+    <label for="r-viewers">Promedio de espectadores</label>
+    <input id="r-viewers" placeholder="Ej: 15-30">
+
+    <label for="r-followers">Seguidores totales</label>
+    <input id="r-followers" placeholder="Ej: 1,200">
+
+    <label for="r-schedule">Horario habitual de transmisión</label>
+    <input id="r-schedule" placeholder="Ej: Lunes a viernes, 8pm (GMT-6)">
+
+    <label for="r-days">¿Cuántos días a la semana transmites?</label>
+    <input id="r-days" placeholder="Ej: 4 días">
+
+    <label for="r-content">¿Qué tipo de contenido transmites?</label>
+    <textarea id="r-content" placeholder="Juegos, charlas, IRL, etc."></textarea>
+
+    <label for="r-games">¿Qué juegos o temas sueles transmitir?</label>
+    <input id="r-games">
+
+    <label for="r-clip">Enlace a un clip o VOD destacado</label>
+    <input id="r-clip" type="url">
+
+    <label class="req" for="r-why">¿Por qué quieres ser streamer del servidor?</label>
+    <textarea id="r-why" required></textarea>
+
+    <label for="r-extra">¿Algo más que quieras compartir?</label>
+    <textarea id="r-extra"></textarea>
+
+    <button class="send" type="submit">Enviar postulación de Streamer</button>
+    <div class="msg" id="msg-streamer"></div>
+  </form>
+</main>
+
+<button id="gear" aria-label="Configuración">⚙</button>
+<div id="panel">
+  <div class="box">
+    <h2>Configurar envíos</h2>
+    <p class="hint">Pega aquí los webhooks de Discord donde quieres recibir cada postulación. Se crean en Ajustes del canal → Integraciones → Webhooks, dentro de tu servidor.</p>
+    <label for="wh-staff">Webhook — Staff</label>
+    <input id="wh-staff" placeholder="https://discord.com/api/webhooks/...">
+    <label for="wh-streamer">Webhook — Streamer</label>
+    <input id="wh-streamer" placeholder="https://discord.com/api/webhooks/...">
+    <div class="row">
+      <button class="btn2" id="save-wh" type="button">Guardar</button>
+      <button class="btn2" id="close-wh" type="button">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var CFG={};try{CFG=JSON.parse(localStorage.getItem("postulaciones_cfg")||"{}")}catch(e){}
+$("wh-staff").value=CFG.staff||"";$("wh-streamer").value=CFG.streamer||"";
+
+document.querySelectorAll(".tab").forEach(function(t){
+  t.onclick=function(){
+    document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active")});
+    document.querySelectorAll(".form").forEach(function(x){x.classList.remove("active")});
+    t.classList.add("active");
+    $("form-"+t.dataset.tab).classList.add("active");
+  };
+});
+
+$("gear").onclick=function(){$("panel").classList.add("open")};
+$("close-wh").onclick=function(){$("panel").classList.remove("open")};
+$("save-wh").onclick=function(){
+  CFG={staff:$("wh-staff").value.trim(),streamer:$("wh-streamer").value.trim()};
+  try{localStorage.setItem("postulaciones_cfg",JSON.stringify(CFG))}catch(e){}
+  $("panel").classList.remove("open");
+};
+
+function field(label,value){return value?{name:label,value:String(value).slice(0,1000)}:null}
+
+function sendForm(kind, embedTitle, fields, msgId, formEl){
+  var url=CFG[kind];
+  var msg=$(msgId);
+  msg.className="msg";msg.textContent="";
+  if(!url){
+    msg.className="msg err";
+    msg.textContent="Esta web aún no tiene configurado a dónde enviar las postulaciones de "+(kind==="staff"?"Staff":"Streamer")+". Pide al administrador que lo configure con el botón ⚙.";
+    return;
+  }
+  var btn=formEl.querySelector("button.send");
+  btn.disabled=true;btn.textContent="Enviando...";
+  fetch(url,{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({embeds:[{title:embedTitle,color:kind==="staff"?5793266:15277667,fields:fields.filter(Boolean),timestamp:new Date().toISOString()}]})
+  }).then(function(r){
+    if(!r.ok) throw new Error("bad status");
+    msg.className="msg ok";msg.textContent="¡Postulación enviada! Te contactaremos por Discord.";
+    formEl.reset();
+  }).catch(function(){
+    msg.className="msg err";msg.textContent="No se pudo enviar. Revisa tu conexión o que el webhook configurado sea correcto.";
+  }).finally(function(){
+    btn.disabled=false;btn.textContent=kind==="staff"?"Enviar postulación de Staff":"Enviar postulación de Streamer";
+  });
+}
+
+$("form-staff").addEventListener("submit",function(e){
+  e.preventDefault();
+  sendForm("staff","📋 Nueva postulación de Staff",[
+    field("Usuario de Discord",$("s-user").value),
+    field("Nombre o apodo",$("s-name").value),
+    field("Edad",$("s-age").value),
+    field("País",$("s-country").value),
+    field("Zona horaria",$("s-tz").value),
+    field("Disponibilidad",$("s-time").value),
+    field("Rol de interés",$("s-role").value),
+    field("Experiencia previa",$("s-exp").value),
+    field("Sanciones previas",$("s-sanction").value),
+    field("Por qué quiere ser staff",$("s-why").value),
+    field("Escenario: conflicto entre miembros",$("s-scenario").value),
+    field("Escenario: spam",$("s-spam").value),
+    field("Bots de moderación",$("s-bots").value),
+    field("Otro contacto",$("s-contact").value),
+    field("Comentario extra",$("s-extra").value)
+  ],"msg-staff",this);
+});
+
+$("form-streamer").addEventListener("submit",function(e){
+  e.preventDefault();
+  sendForm("streamer","🎥 Nueva postulación de Streamer",[
+    field("Usuario de Discord",$("r-user").value),
+    field("Nombre o apodo",$("r-name").value),
+    field("Edad",$("r-age").value),
+    field("País",$("r-country").value),
+    field("Plataforma",$("r-platform").value),
+    field("Enlace al canal",$("r-link").value),
+    field("Espectadores promedio",$("r-viewers").value),
+    field("Seguidores totales",$("r-followers").value),
+    field("Horario",$("r-schedule").value),
+    field("Días por semana",$("r-days").value),
+    field("Tipo de contenido",$("r-content").value),
+    field("Juegos o temas",$("r-games").value),
+    field("Clip o VOD destacado",$("r-clip").value),
+    field("Por qué quiere ser streamer",$("r-why").value),
+    field("Comentario extra",$("r-extra").value)
+  ],"msg-streamer",this);
+});
+})();
+</script>
+</body>
+</html>
